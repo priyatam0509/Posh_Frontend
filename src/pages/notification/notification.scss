@@ -1,0 +1,235 @@
+.new {
+    width: 100%;
+    display: flex;
+  
+    .newContainer {
+      flex: 6;
+  
+      .top,
+      .bottom {
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        padding: 10px;
+        margin: 20px;
+        display: flex;
+  
+        h1 {
+          color: lightgray;
+          font-size: 20px;
+        }
+  
+        .left {
+          flex: 1;
+          text-align: center;
+          padding-top: 12%;
+          img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+  
+        .right {
+          flex: 2;
+  
+          form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-around;
+  
+            .formInput {
+              width: 40%;
+  
+              label {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+  
+                .icon {
+                  cursor: pointer;
+                }
+              }
+              .MuiInputBase-root,.MuiFormControl-root{
+                width: 100%;
+              }
+              .MuiStack-root{
+              overflow: hidden!important;
+              }
+              .inputFieldCutom {
+                width: 100%;
+                padding: 5px;
+                border: none;
+                border-bottom: 1px solid gray;
+              }
+            }
+            .marginTop-10{
+              margin-top: 10px;
+            }
+            .marginTopCutom10{
+              margin-top: -10px;
+            }
+            .submit-Btn {
+              width: 150px;
+              padding: 10px;
+              border: none;
+              background-color: teal;
+              color: white;
+              font-weight: bold;
+              cursor: pointer;
+              margin-top: 10px;
+  
+              &:disabled{
+                background-color: rgba(3, 92, 92, 0.322);
+                cursor: not-allowed;
+              }
+            }
+          }
+        }
+      }
+    }
+    .margin-20{
+        margin: 20px;
+    }
+    .dateCustomCss{
+        width: 100%;
+        padding: 20px;
+    }
+    .expensesHeadline{
+        font-size: 24px;
+        color: #9b9b9b;
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+    .text-Center{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .cardHeight{
+        height: 400px;
+    }
+    .borderCustomCss{
+        border: 1px solid;
+    border-radius: 5px;
+    border-color: #e0e0e0;
+    }
+  }
+  .datatable {
+    // height: 600px;
+    padding: 0px;
+    padding-top: 20px!important;
+    
+    .datatableTitle{
+      width: 100%;
+      font-size: 24px;
+      color: gray;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      .link{
+        text-decoration: none;
+        color: green;
+        font-size: 16px;
+        font-weight: 400;
+        border: 1px solid green;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  
+    .cellWithImg {
+      display: flex;
+      align-items: center;
+  
+      .cellImg {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 20px;
+      }
+    }
+  
+    .cellWithStatus {
+      padding: 5px;
+      border-radius: 5px;
+  
+      &.active {
+        background-color: rgba(0, 128, 0, 0.05);
+        color: green;
+      }
+      &.pending {
+        background-color: rgba(255, 217, 0, 0.05);
+        color: goldenrod;
+      }
+      &.passive {
+        background-color: rgba(255, 0, 0, 0.05);
+        color: crimson;
+      }
+    }
+  
+    .cellAction {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+  
+      .viewButton {
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: darkblue;
+        border: 1px dotted rgba(0, 0, 139, 0.596);
+        cursor: pointer;
+      }
+      
+      .deleteButton {
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: crimson;
+        border: 1px dotted rgba(220, 20, 60, 0.6);
+        cursor: pointer;
+      }
+      .subsButton {
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: darkgreen;
+        border: 1px dotted rgba(2, 99, 67, 0.6);
+        cursor: pointer;
+        &:disabled{
+          background-color: rgba(3, 92, 92, 0.322);
+          color: rgb(153, 146, 146);
+          cursor: not-allowed;
+        }
+      }
+  
+      
+      .customModalCss{
+        position: 'absolute';
+        top: '50%';
+        left: '50%';
+        transform: 'translate(-50%, -50%)';
+        width: 400px;
+        background-color: 'background.paper';
+        border: '2px solid #000';
+        box-shadow: 24px;
+        padding: 4px;
+      }
+  
+    }
+  
+  }
+  .data-grid{
+      margin-bottom: 10px;
+  }
+  .width-100{
+      width: 100%;
+      margin-top: 20px;
+  }
+  .msgCustomCss{
+      text-align: center;
+      font-size: 15px;
+      color: green;
+  }
