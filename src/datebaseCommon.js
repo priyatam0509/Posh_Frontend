@@ -12,10 +12,10 @@ const previousSixMonth = new Date(new Date().setMonth(today.getMonth() - 6));
 const previousYear = new Date(new Date().setMonth(today.getMonth() - 12));
 const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 // console.log("yesterday",yesterday)
-console.log("previousMonth",previousMonth)
-console.log("previousLastMonth",previousLastMonth)
-console.log("yearCurrentMonth",yearCurrentMonth)
-console.log("today",today)
+// console.log("previousMonth",previousMonth)
+// console.log("previousLastMonth",previousLastMonth)
+// console.log("yearCurrentMonth",yearCurrentMonth)
+// console.log("today",today)
 
 
 export const CollectionDetails = async (table) =>{
@@ -27,6 +27,16 @@ export const CollectionDetails = async (table) =>{
      return value;//await dbRequest(dbQuery)
  
  } 
+
+ export const GetDetailbyDatabse= async (tableName)=>{
+    const dbRef = query(
+      collection(db, tableName)
+    );
+    const dbRefData = await getDocs(dbRef);
+    
+    //console.log("dbRefData",dbRefData.docs)
+    return dbRefData;
+  }
 export const TodayDetails = async (table) =>{
    let dbQuery= query(
         collection(db, table),
@@ -89,7 +99,7 @@ export const YearDetails = async (table) =>{
     //console.log("value",value)
     if(value && value.length){
          yearcal= YearlyCalculation(value)
-        console.log("yearcal",yearcal)
+        // console.log("yearcal",yearcal)
     }
   return yearcal;
 }
@@ -167,7 +177,7 @@ const YearlyCountCalculation = (yearlyRecord)=>{
         }).filter(x=>new Date(x.endDate)>=yesterday);
 
         var result = [];
-        console.log("resultMapped",resultMapped)
+        // console.log("resultMapped",resultMapped)
          YearlyResult=resultMapped.reduce(function(res, value) {
         if (!res[value.MonthName]) {
             res[value.MonthName] = { name: value.MonthName, Total: 0 };

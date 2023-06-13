@@ -294,7 +294,7 @@ const Datatable = () => {
     let requestbody=sendMailobject(data);
     console.log("requestbody",requestbody)
     const response = await axios.post(
-      "https://posh-health-backend.onrender.com/api/sendemailnew",
+      "http://localhost:5000/api/sendemailnew",
       requestbody
     );
     // console.log(response.data);
@@ -552,6 +552,7 @@ let uniqueId = createGuid();
                   <MenuItem value="amazon_pay">Amazon Pay</MenuItem>
                   <MenuItem value="paytm">Paytm</MenuItem>
                   <MenuItem value="phone_pay">Phone Pay</MenuItem>
+                  <MenuItem value="card">Debit/Credit Card</MenuItem>
                   <MenuItem value="other">Other Payment Mode</MenuItem>
             </Select>
           </FormControl>

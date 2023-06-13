@@ -9,7 +9,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
-import {TodayDetails,LastMonthDetails,WeekDetails,CurrentMonthDetails,dbName,MoneyFormatter } from "../../datebaseCommon"
+import {TodayDetails,LastMonthDetails,WeekDetails,CurrentMonthDetails,dbName,MoneyFormatter,GetDetailbyDatabse } from "../../datebaseCommon"
 
 const Featured = () => {
 
@@ -23,7 +23,7 @@ const Featured = () => {
   
     try { 
       
-     
+      let UserDetail= await GetDetailbyDatabse("users");
       let TodayUserResult=  TodayDetails(dbName.Users);
       let WeekUserResult=  WeekDetails(dbName.Users);
       let MonthUserResult= LastMonthDetails(dbName.Users);
@@ -62,8 +62,20 @@ const Featured = () => {
 
       const mappedRevenueAmount=(RevenueObject)=>{
         let todayExpences=0;
+        let idList1=UserDetail.docs.map(x=>x.id.toString());
+        //console.log("idList1",idList1)
+        //totalsubscribeExpenseData.docs.filter(x=>x.)
+        //let mapExpense=totalsubscribeExpenseData.docs.map(x=>x.data());
+        
+
         if(RevenueObject && RevenueObject.length){
-          RevenueObject.forEach(result=>{
+          if(RevenueObject.length>0){
+            console.log("RevenueObject",RevenueObject[1])
+            RevenueObject[1]=RevenueObject[1]?.filter(x=>idList1?.includes(x.userid));
+            console.log("userIdFilter after",RevenueObject[1])
+          }
+          
+          RevenueObject?.forEach(result=>{
             todayExpences+=reduceAmount(result);
           });
         }
@@ -71,6 +83,7 @@ const Featured = () => {
       }
 
       TodayResult.then(todayValue=>{
+        console.log("TodayResult",todayValue)
         setData((prev) => ({ ...prev, todayValues: MoneyFormatter(mappedRevenueAmount(todayValue)) }));
         //console.log("todayValue",data)
       });

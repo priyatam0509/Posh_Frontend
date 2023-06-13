@@ -26,6 +26,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import {
     collection,
@@ -54,6 +55,9 @@ const Expenses = () => {
     const [sucessMsg, setSuccessMsg] = useState('');
     const [description, setDescription] = useState('');
     const [expenseDate, setExpenseDate] = useState(new Date());
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
   
     let updateExpenseDate = dateFormat(expenseDate, 'dd/mm/yyyy');
 
@@ -68,7 +72,6 @@ const Expenses = () => {
             snapShot.docs.forEach((doc) => {
               list.push({ id: doc.id, ...doc.data() });
             });
-            console.log('list: ', list);
             setData(list);
           },
           (error) => {
@@ -95,7 +98,7 @@ const Expenses = () => {
         {
           field: "expenseDate",
           headerName: "Date",
-          width: 300,
+          width: 200,
         },
         {
           field: "expenseDescription",
@@ -105,7 +108,7 @@ const Expenses = () => {
         {
           field: "expenseAmount",
           headerName: "Amount",
-          width: 250,
+          width: 200,
         },
 
       ];
@@ -156,7 +159,45 @@ const Expenses = () => {
         };
    } 
 
- 
+
+   const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, "expenses", id));
+      setData(data.filter((item) => item.id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const customCssModal = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const actionColumn = [  
+      {
+        field: "action",
+        headerName: "Action",
+        width: 150,
+        renderCell: (params) => {
+          
+          return (
+            <div className="cellAction">
+              <div
+                className="deleteButton" onClick={() => handleDelete(params.id)}
+                >
+                Delete
+              </div>
+            </div>
+          );
+        },
+      },
+    ];
     return (
         <div className="new">
           <Sidebar />
@@ -199,7 +240,7 @@ const Expenses = () => {
                     <DataGrid
                         className="datagrid"
                         rows={data}
-                        columns={userColumns}
+                        columns={userColumns.concat(actionColumn)}
                         pageSize={9}
                         rowsPerPageOptions={[9]}
                         checkboxSelection

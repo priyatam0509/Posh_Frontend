@@ -171,19 +171,36 @@ const Widget = ({ type }) => {
       let totalsubscribeAmount=0;
       const totalsubscribeExpenseData = await getDetailbyDatabse('newSubscription');
       const totaluserExpenseData = await getDetailbyDatabse('users');
+      // var idlist=totaluserExpenseData.docs.forEach(x=>x.get());
+      // console.log("idlist",idlist);
+      
       
       if(totalsubscribeExpenseData && totalsubscribeExpenseData.docs && totalsubscribeExpenseData.docs.length){
+        let idList1=totaluserExpenseData.docs.map(x=>x.id.toString());
+        //console.log("idList1",idList1)
+        //totalsubscribeExpenseData.docs.filter(x=>x.)
         let mapExpense=totalsubscribeExpenseData.docs.map(x=>x.data());
-        let totalExpense = mapExpense.reduce((privious,current)=>{
-          let amount= current.amount==""?0:parseFloat(current.amount)
-         return privious+amount;
-        },0)
+        let userIdFilter=mapExpense.filter(x=>idList1?.includes(x.userid));
+        //console.log("userIdFilter",userIdFilter)
+       // console.log("totalsubscribeExpenseData",mapExpense)
+        if(userIdFilter && userIdFilter.length>0){
+          let totalExpense = userIdFilter.reduce((privious,current)=>{
+            let amount= current.amount==""?0:parseFloat(current.amount)
+           return privious+amount;
+          },0);
+          totalsubscribeAmount+=totalExpense;
+        }
+       
         
-        totalsubscribeAmount+=totalExpense;
+        
       }
 
       if(totaluserExpenseData && totaluserExpenseData.docs && totaluserExpenseData.docs.length){
         let mapExpense=totaluserExpenseData.docs.map(x=>x.data());
+        //console.log("totaluserExpenseData",mapExpense)
+        //debugger;
+        //totaluserExpenseData.docs.forEach(x=>x.get());
+        //console.log("totaluserExpenseData.docs",)
         let totalExpense = mapExpense.reduce((privious,current)=>{
           let amount= current.amount==""?0:parseFloat(current.amount)
           return privious+amount;
