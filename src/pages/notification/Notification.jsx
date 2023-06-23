@@ -71,7 +71,7 @@ const Notification = () => {
                 collection(db, "users"),
                 );
                 const updatedEmailDataList = await getDocs(emailDataList);
-                let mapNewUsersEmail = updatedEmailDataList.docs.map(x=>x.data().email);
+                let mapNewUsersEmail = updatedEmailDataList.docs.map(x=>x.data().email);
                 // console.log('mapNewUsersEmail: ', mapNewUsersEmail);
                 // const stringEmail = mapNewUsersEmail.toString();
                 // const replaceCommaEmails = stringEmail.replaceAll(",", ";");
@@ -106,7 +106,7 @@ const Notification = () => {
             let requestbody=sendMailobject(data);
             console.log("requestbody",requestbody)
             const response = await axios.post(
-              "https://posh-health-backend.onrender.com/api/sendemailnew",
+              "https://posh-backend.onrender.com/api/sendemailnew",
               requestbody
             );
 
@@ -158,7 +158,7 @@ const Notification = () => {
                     <Grid item xs={12}>
                         <FormControlLabel onChange={sentEmailCheckbox}  control={<Checkbox />} label="Send Mail to All Clients" />
                        {checked == false && (<TextField id="standard-basic" className="marg-btm-10" type="email" label="Enter your Email (Ex- xxx@gmail.com, yyy@gmail.com)" variant="standard" value={sendEmailValue} onChange={sendMultipleEmail}/>)}                
-                        <TextField id="standard-basic" className="marg-btm-10" type="text" label="Enter your Subject Line.." variant="standard" value={subjectEmail} onChange={discriptionMultipleEmail} required/>
+                        <TextField id="standard-basic" className="marg-btm-10 marg-10" type="text" label="Enter your Subject Line.." variant="standard" value={subjectEmail} onChange={discriptionMultipleEmail} required/>
                         <TextareaAutosize id="standard-basic" className="width-100" aria-label="minimum height" minRows={3} placeholder="Enter Your Message..." value={multiDescription} onChange={emailMessageUser} variant="standard" required/>
                         {/* <TextField id="standard-basic" type="textarea" label="Description" onChange={discriptionExpense}   /> */}
                     </Grid>
