@@ -294,7 +294,7 @@ const Datatable = () => {
     let requestbody=sendMailobject(data);
     console.log("requestbody",requestbody)
     const response = await axios.post(
-      "https://posh-backend.onrender.com/api/sendemail",
+      "https://posh-backend.onrender.com/api/sendemailnew",
       requestbody
     );
     // console.log(response.data);

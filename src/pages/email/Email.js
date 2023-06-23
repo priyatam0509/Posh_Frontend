@@ -15,7 +15,7 @@ function Email() {
     };
 
     const response = await axios.post(
-      "https://posh-backend.onrender.com/api/sendemail",
+      "https://posh-backend.onrender.com/api/sendemailnew",
       data
     );
     console.log(response.data);
