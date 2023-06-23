@@ -266,7 +266,7 @@ const New = ({ inputs, title }) => {
     
     let requestbody=sendMailobject();
     const response = await axios.post(
-      "http://localhost:5000/api/sendemailnew",
+      "https://posh-backend.onrender.com/api/sendemail",
       requestbody
     );
     // console.log(response.data);
