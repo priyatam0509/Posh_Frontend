@@ -15,7 +15,7 @@ function Email() {
     };
 
     const response = await axios.post(
-      "https://posh-health-backend.onrender.com/api/sendemail",
+      "https://posh-backend.onrender.com/api/sendemail",
       data
     );
     console.log(response.data);
