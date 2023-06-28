@@ -106,7 +106,7 @@ const Notification = () => {
             let requestbody=sendMailobject(data);
             console.log("requestbody",requestbody)
             const response = await axios.post(
-              "https://posh-backend.onrender.com/api/sendemailnew",
+              "https://posh-backend.onrender.com/api/sendemail",
               requestbody
             );
 
