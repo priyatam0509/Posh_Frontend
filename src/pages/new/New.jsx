@@ -53,13 +53,17 @@ const New = ({ inputs, title }) => {
   let subsStartDate = dateFormat(startDate, 'mm/dd/yyyy');
   let endDate = ({subscriptionDate}.subscriptionDate[1]);
   let subsEndDate = dateFormat(endDate, 'mm/dd/yyyy');
-  let todayNewDate = dateFormat(new Date(), 'mm/dd/yyyy')
+  let todayNewDate = dateFormat(new Date(), 'dd/mm/yyyy')
   let newExpiryDate = dateFormat(subsEndDate, 'dd/mm/yyyy');
+
+  let pdfStartDate = dateFormat(startDate, 'dd/mm/yyyy');
+  let pdfEndDate = dateFormat(endDate, 'dd/mm/yyyy');
 
   let pdfObj = {
     newExpiryDate,
     todayNewDate,
-    subsStartDate,
+    pdfStartDate,
+    pdfEndDate,
     data
 
   }
@@ -229,12 +233,12 @@ const New = ({ inputs, title }) => {
             <tr class="item">
               <td>Subscription Start Date</td>
     
-              <td>${subsStartDate}</td>
+              <td>${pdfStartDate}</td>
             </tr>
             <tr class="item">
               <td>Subscription Expiry Date</td>
     
-              <td>${subsEndDate}</td>
+              <td>${pdfEndDate}</td>
             </tr> 
             <tr class="item last">
             <td>Paid Amount</td>
@@ -361,8 +365,8 @@ const New = ({ inputs, title }) => {
 const submitSubscriptionDate = ()=> {
       //Email();
       if(endDate != new Date()){
-        setData((prev) => ({ ...prev, startDate: subsStartDate }));
-        setData((prev) => ({ ...prev, endDate: subsEndDate }));
+        setData((prev) => ({ ...prev, startDate: dateFormat(subsStartDate, 'dd/mm/yyyy')  }));
+        setData((prev) => ({ ...prev, endDate:dateFormat(subsEndDate, 'dd/mm/yyyy')  }));
         sendEmail();
       }
 
