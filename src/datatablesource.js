@@ -40,21 +40,11 @@ export const userColumns = [
     headerName: "Gender",
     width: 100,
   },
-  {
-    field: "amount",
-    headerName: "Amount",
-    width: 100,
-  },
 
   {
     field: "subscription",
     headerName: "Subscription",
     width: 120,
-  },
-  {
-    field: "startDate",
-    headerName: "Start Date",
-    width: 100,
   },
   {
     field: "endDate",

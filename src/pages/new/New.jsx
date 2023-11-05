@@ -53,22 +53,40 @@ const New = ({ inputs, title }) => {
   let subsStartDate = dateFormat(startDate, 'mm/dd/yyyy');
   let endDate = ({subscriptionDate}.subscriptionDate[1]);
   let subsEndDate = dateFormat(endDate, 'mm/dd/yyyy');
-  let todayNewDate = dateFormat(new Date(), 'dd/mm/yyyy')
-  let newExpiryDate = dateFormat(subsEndDate, 'dd/mm/yyyy');
-
-  let pdfStartDate = dateFormat(startDate, 'dd/mm/yyyy');
-  let pdfEndDate = dateFormat(endDate, 'dd/mm/yyyy');
+  let todayNewDate = dateFormat(new Date(), 'mm/dd/yyyy')
+  let newExpiryDate = dateFormat(subsEndDate, 'mm/dd/yyyy');
 
   let pdfObj = {
     newExpiryDate,
     todayNewDate,
-    pdfStartDate,
-    pdfEndDate,
+    subsStartDate,
     data
 
   }
+  
   const sendMailobject= ()=>{
+    var inputDate = subsEndDate;
+    console.log("line no 69",inputDate)
+    var parts = inputDate.split('/');
 
+if (parts.length === 3) {
+    var month = parts[0];
+    var day = parts[1];
+    var year = parts[2];
+}
+var formattedDate = `${day}/${month}/${year}`;
+
+var inputDate1 = subsStartDate;
+    console.log("line no 69",inputDate)
+    var parts1 = inputDate1.split('/');
+
+if (parts1.length === 3) {
+    var month1 = parts1[0];
+    var day1 = parts1[1];
+    var year1 = parts1[2];
+}
+var formattedDate1 = `${day1}/${month1}/${year1}`;
+    
     let userName=`${data.firstname} ${data.lastname}`
     let mailObj ={};
     mailObj.subject="Registration In POSH HEALTH CLUB";
@@ -233,12 +251,12 @@ const New = ({ inputs, title }) => {
             <tr class="item">
               <td>Subscription Start Date</td>
     
-              <td>${pdfStartDate}</td>
+              <td>${formattedDate1}</td>
             </tr>
             <tr class="item">
               <td>Subscription Expiry Date</td>
     
-              <td>${pdfEndDate}</td>
+              <td>${formattedDate}</td>
             </tr> 
             <tr class="item last">
             <td>Paid Amount</td>
@@ -365,8 +383,8 @@ const New = ({ inputs, title }) => {
 const submitSubscriptionDate = ()=> {
       //Email();
       if(endDate != new Date()){
-        setData((prev) => ({ ...prev, startDate: dateFormat(subsStartDate, 'dd/mm/yyyy')  }));
-        setData((prev) => ({ ...prev, endDate:dateFormat(subsEndDate, 'dd/mm/yyyy')  }));
+        setData((prev) => ({ ...prev, startDate: subsStartDate }));
+        setData((prev) => ({ ...prev, endDate: subsEndDate }));
         sendEmail();
       }
 

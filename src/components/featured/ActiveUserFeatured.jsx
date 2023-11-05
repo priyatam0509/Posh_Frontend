@@ -10,6 +10,7 @@ import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutl
 import {TodayDetails,LastMonthDetails,WeekDetails,CurrentMonthDetails,dbName ,MoneyFormatter,CollectionDetails} from "../../datebaseCommon";
 import PersonIcon from '@mui/icons-material/Person';
 import dateFormat, { masks } from "dateformat";
+import { Form, Link,useNavigate } from "react-router-dom";
 
 
 const ActiveUserFeatured = () => {
@@ -131,23 +132,25 @@ const ActiveUserFeatured = () => {
         <div className="summary">
           <div className="item">
             {/* <div className="itemTitle">Target</div> */}
-            <div className="itemTitleFontSizePositive">Total Active </div> 
+            <div className="itemTitleFontSizePositive">Total Active</div> 
             <div className="itemResultFontSize positive">
               {/* <KeyboardArrowDownIcon fontSize="small"/> */}
-                  <div className="resultAmount userPadding">{data.activeUser}</div>
+              <Link to="/Active" className="link"><div className="resultAmount userPadding">{data.activeUser}</div></Link>
             </div>
           </div>
           <div className="item">
+            
+          
             <div className="itemTitleFontSizeNegative">Total InActive</div>
             <div className="itemResultFontSize negative">
               {/* <KeyboardArrowUpOutlinedIcon fontSize="small"/> */}
-                <div className="resultAmount userPadding">{data.deActiveUser}</div>
+              <Link to="/Inactive" className="link"><div className="resultAmount userPadding">{data.deActiveUser}</div></Link>
             </div>
           </div>
         </div>
         <div>
         </div>
-        <p className="title fontSize-20">Active Users</p>
+        <p className="title fontSize-20"><Link to="/Active" className="link">Active Users</Link></p>
         <div className="summary">
           <div className="item">
             {/* <div className="itemTitle">Target</div> */}

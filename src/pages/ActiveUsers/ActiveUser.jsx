@@ -2,7 +2,9 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import axios from "axios";
-import "./datatable.scss";
+import "./ActiveUser.scss";
+import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesource";
 import { Form, Link,useNavigate } from "react-router-dom";
@@ -19,7 +21,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import '@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import Invoice from '../Invoice/invoice.jsx'
+import Invoice from '../../components/Invoice/invoice.jsx'
 import {ReactPDF } from 'react-pdf-html';
 import {storage} from "../../firebase"
 // import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -55,7 +57,7 @@ const style = {
   p: 4,
 };
 
-const Datatable = () => {
+const Active = () => {
   const [data, setData] = useState([]);
   const [subscribeData, setSubscribeData] = useState({});
   const [userId, setUserId] = useState();
@@ -89,31 +91,34 @@ const Datatable = () => {
     subsStartDate,
     data:dataobj
   }
-  var inputDate = subsEndDate;
-  console.log("line no 69",inputDate)
-  var parts = inputDate.split('/');
+
+    
+    let userName=`${subscribeData.firstname} ${subscribeData.lastname}`
+    let mailObj ={};
+    let newExpireDate = dateFormat(endDate, 'dd/mm/yyyy');
+
+    var inputDate = subsEndDate;
+    console.log("line no 69",inputDate)
+    var parts = inputDate.split('/');
 
 if (parts.length === 3) {
-  var month = parts[0];
-  var day = parts[1];
-  var year = parts[2];
+    var month = parts[0];
+    var day = parts[1];
+    var year = parts[2];
 }
 var formattedDate = `${day}/${month}/${year}`;
 
 var inputDate1 = subsStartDate;
-  console.log("line no 69",inputDate)
-  var parts1 = inputDate1.split('/');
+    console.log("line no 69",inputDate)
+    var parts1 = inputDate1.split('/');
 
 if (parts1.length === 3) {
-  var month1 = parts1[0];
-  var day1 = parts1[1];
-  var year1 = parts1[2];
+    var month1 = parts1[0];
+    var day1 = parts1[1];
+    var year1 = parts1[2];
 }
 var formattedDate1 = `${day1}/${month1}/${year1}`;
-  
-    let userName=`${subscribeData.firstname} ${subscribeData.lastname}`
-    let mailObj ={};
-    let newExpireDate = dateFormat(endDate, 'dd/mm/yyyy');
+
 
     mailObj.subject="Subscription In POSH HEALTH CLUB";
     mailObj.to= subscribeData.email;
@@ -322,17 +327,25 @@ var formattedDate1 = `${day1}/${month1}/${year1}`;
     // console.log(response.data);
   };
   
-  
   const navigate = useNavigate();
+  const currentDate = new Date();
   useEffect(() => {
 
     const unsub = onSnapshot(
       collection(db, "users"),
       (snapShot) => {
-        let list = [];
+        const list = [];
+    
         snapShot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
+          const userData = { id: doc.id, ...doc.data() };
+          const endDate = new Date(userData.endDate);
+    
+          // Check if the endDate is less than the current date
+          if (endDate > currentDate) {
+            list.push(userData);
+          }
         });
+    
         setData(list);
       },
       (error) => {
@@ -491,9 +504,11 @@ let uniqueId = createGuid();
         }
         
         return (
+        
           <div className="cellAction">
             
-            <Link to={`${params.row.id}`} style={{ textDecoration: "none" }}>
+            
+            <Link to={`/users/${params.row.id}`} style={{ textDecoration: "none" }}>
               <div className="viewButton" >View</div>
             </Link>
             {button}
@@ -513,14 +528,18 @@ let uniqueId = createGuid();
   ];
 
   return (
+    <div className="new">
+      <Sidebar />
+      <div className="newContainer">
+            <Navbar />
     <div className="datatable marg-lr-10">
       
       <div className="datatableTitle">
-        All Users
+        Inactive User
       
-        <Link to="/users/new" className="link">
+        {/* <Link to="/users/new" className="link">
           Add New User
-        </Link>
+        </Link> */}
         {/* ReactPDF.render(<Invoice />, `${__dirname}/example.pdf`); */}
       </div>
       <DataGrid
@@ -609,10 +628,10 @@ let uniqueId = createGuid();
         </Box>
       </Modal>
     </div>
-
-
+</div>
+</div>
     
   );
 };
 
-export default Datatable;
+export default Active;

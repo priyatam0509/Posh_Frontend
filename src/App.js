@@ -3,6 +3,8 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
+import Inactive from "./pages/InactiveUsers/InactiveUser";
+import Active from "./pages/ActiveUsers/ActiveUser";
 import Notification from "./pages/notification/Notification";
 import Expenses from "./pages/expenses/Expenses";
 import React, { useState, useEffect } from 'react';
@@ -71,6 +73,14 @@ function App() {
               }
             />
             <Route
+              path="ActiveUsers"
+              element={
+                <RequireAuth>
+                  <Notification/>
+                </RequireAuth>
+              }
+            ></Route> 
+            <Route
               path="new"
               element={
                 <RequireAuth>
@@ -95,6 +105,22 @@ function App() {
                 </RequireAuth>
               }
             ></Route> 
+            <Route
+              path="Inactive"
+              element={
+                <RequireAuth>
+                  <Inactive/>
+                </RequireAuth>
+              }
+            ></Route> 
+            <Route
+              path="Active"
+              element={
+                <RequireAuth>
+                  <Active/>
+                </RequireAuth>
+              }
+            ></Route>
           {/* <Route path="products">
             <Route
               index

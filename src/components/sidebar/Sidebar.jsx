@@ -97,13 +97,21 @@ const Sidebar = () => {
           </li>
           <li>
             <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
+            <dspan>Settings</span>
           </li> */}
           <p className="title ">USER</p>
-          <li >
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
+          <Link to="/Inactive" style={{ textDecoration: "none" }}>
+          <li>
+            <PaidIcon className="icon" />
+            <span>Inactive User</span>
           </li>
+          </Link>
+          <Link to="/Active" style={{ textDecoration: "none" }}>
+          <li>
+            <PaidIcon className="icon" />
+            <span>Active User</span>
+          </li>
+          </Link>
           <li  onClick = {logoutBtnCall}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
