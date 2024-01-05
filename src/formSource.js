@@ -1,5 +1,11 @@
 export const userInputs = [
   {
+    id: "Uid",
+    label: "Index",
+    type: "number",
+    placeholder: "Enter Customer Indexing",
+  },
+  {
     id: "firstname",
     label: "First Name",
     type: "text",
@@ -40,6 +46,12 @@ export const userInputs = [
     label: "Address",
     type: "text",
     placeholder: "Enter your client address",
+  },
+  {
+    id: "comment",
+    label: "Comment",
+    type: "text",
+    placeholder: "Enter your comments",
   },
   // {
   //   id: "gender",

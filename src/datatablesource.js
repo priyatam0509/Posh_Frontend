@@ -16,6 +16,11 @@ export const userColumns = [
   //   },
   // },
   {
+    field: "Uid",
+    headerName: "index",
+    width: 100,
+  },
+  {
     field: "firstname",
     headerName: "First Name",
     width: 100,
@@ -54,6 +59,11 @@ export const userColumns = [
   {
     field: "payment",
     headerName: "Payment Mode",
+    width: 100,
+  },
+  {
+    field: "comment",
+    headerName: "Comment",
     width: 100,
   },
   // {
